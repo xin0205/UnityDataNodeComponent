@@ -5,6 +5,7 @@
 // Feedback: mailto:jiangyin@gameframework.cn
 //------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 
 namespace GameFramework.DataNode
@@ -32,7 +33,7 @@ namespace GameFramework.DataNode
             {
                 if (!IsValidName(name))
                 {
-                    throw new GameFrameworkException("Name of data node is invalid.");
+                    throw new SystemException("Name of data node is invalid.");
                 }
 
                 m_Name = name;
@@ -142,7 +143,7 @@ namespace GameFramework.DataNode
             {
                 if (!IsValidName(name))
                 {
-                    throw new GameFrameworkException("Name is invalid.");
+                    throw new SystemException("Name is invalid.");
                 }
 
                 if (m_Childs == null)

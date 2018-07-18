@@ -16,21 +16,21 @@ namespace UnityGameFramework.Runtime
     /// </summary>
     [DisallowMultipleComponent]
     [AddComponentMenu("Game Framework/Data Node")]
-    public sealed class DataNodeComponent : GameFrameworkComponent
+    public sealed class DataNodeComponent : MonoBehaviour
     {
         private IDataNodeManager m_DataNodeManager = null;
 
         /// <summary>
         /// 游戏框架组件初始化。
         /// </summary>
-        protected override void Awake()
+        void Awake()
         {
-            base.Awake();
+            UGFDataNode.Component = this;
 
-            m_DataNodeManager = GameFrameworkEntry.GetModule<IDataNodeManager>();
+            m_DataNodeManager = new DataNodeManager();
             if (m_DataNodeManager == null)
             {
-                Log.Fatal("Data node manager is invalid.");
+                Debug.Log("Data node manager is invalid.");
                 return;
             }
         }

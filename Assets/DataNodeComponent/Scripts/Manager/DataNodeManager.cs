@@ -12,7 +12,7 @@ namespace GameFramework.DataNode
     /// <summary>
     /// 数据结点管理器。
     /// </summary>
-    internal sealed partial class DataNodeManager : GameFrameworkModule, IDataNodeManager
+    internal sealed partial class DataNodeManager : IDataNodeManager
     {
         private static readonly string[] EmptyStringArray = new string[] { };
         private static readonly string[] PathSplit = new string[] { ".", "/", "\\" };
@@ -44,7 +44,7 @@ namespace GameFramework.DataNode
         /// </summary>
         /// <param name="elapseSeconds">逻辑流逝时间，以秒为单位。</param>
         /// <param name="realElapseSeconds">真实流逝时间，以秒为单位。</param>
-        internal override void Update(float elapseSeconds, float realElapseSeconds)
+        internal void Update(float elapseSeconds, float realElapseSeconds)
         {
 
         }
@@ -52,7 +52,7 @@ namespace GameFramework.DataNode
         /// <summary>
         /// 关闭并清理数据结点管理器。
         /// </summary>
-        internal override void Shutdown()
+        internal void Shutdown()
         {
             Clear();
             m_Root = null;
@@ -91,7 +91,7 @@ namespace GameFramework.DataNode
             IDataNode current = GetNode(path, node);
             if (current == null)
             {
-                throw new GameFrameworkException(string.Format("Data node is not exist, path '{0}', node '{1}'.", path, (node != null ? node.FullName : string.Empty)));
+                throw new SystemException(string.Format("Data node is not exist, path '{0}', node '{1}'.", path, (node != null ? node.FullName : string.Empty)));
             }
 
             return current.GetData<T>();
@@ -108,7 +108,7 @@ namespace GameFramework.DataNode
             IDataNode current = GetNode(path, node);
             if (current == null)
             {
-                throw new GameFrameworkException(string.Format("Data node is not exist, path '{0}', node '{1}'.", path, (node != null ? node.FullName : string.Empty)));
+                throw new SystemException(string.Format("Data node is not exist, path '{0}', node '{1}'.", path, (node != null ? node.FullName : string.Empty)));
             }
 
             return current.GetData();
